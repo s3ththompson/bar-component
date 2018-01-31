@@ -1,0 +1,22 @@
+{
+  "name": "bar-component",
+  "version": "1.0.0",
+  "description": "tiny loading bar component",
+  "main": "index.js",
+  "scripts": {
+    "fmt": "prettier-standard '**/*.js'",
+    "test": "npm run fmt"
+  },
+  "author": "Seth Thompson <s3th.thompson@gmail.com> (https://seththompson.org)",
+  "repository": "s3ththompson/bar-component",
+  "license": "MIT",
+  "dependencies": {
+    "bel": "^5.1.5",
+    "nanocomponent": "^6.5.0",
+    "sheetify": "^7.1.0",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {
+    "prettier-standard": "^8.0.0"
+  }
+}
