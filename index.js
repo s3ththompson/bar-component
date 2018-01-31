@@ -1,18 +1,6 @@
 var Nanocomponent = require('nanocomponent')
 var html = require('bel')
 var xtend = require('xtend')
-var css = require('sheetify')
-
-var basic = css`
-  :host {
-    transition: all 200ms ease;
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-  }
-`
 
 module.exports = Bar
 
@@ -28,22 +16,29 @@ Bar.identity = function () {
 }
 
 Bar.prototype.createElement = function (progress, color, height) {
-  var custom = attributes(progress, color, height)
-  return html`<div class="${basic}" styles="${custom}"></div>`
+  return html`<div styles="${css(progress, color, height)}"></div>`
 }
 
 Bar.prototype.update = function (progress, color, height) {
-  var custom = attributes(progress, color, height)
-  if (this.element) this.element.setAttribute('style', custom)
+  if (this.element) {
+    this.element.setAttribute('style', css(progress, color, height))
+  }
   return false
 }
 
-function attributes (progress, color, height) {
-  if (progress == null) return 'transition: none; ' + translate(-100)
+function css (progress, color, height) {
+  var styles = `transition: all 200ms ease;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;`
+  if (progress == null) return styles + 'transition: none; ' + translate(-100)
   if (!color) color = '#000'
   if (!height) height = '2px'
   if (Number.isInteger(height)) height += 'px'
   return (
+    styles +
     translate(100 * (progress - 1)) +
     ` background-color: ${color}; height: ${height};`
   )
